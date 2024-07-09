@@ -1,16 +1,16 @@
-name: Greetings
+name: Test
 
-on: [pull_request_target, issues]
-
+on:
+  release:
+    types: [created]
+  workflow_dispatch: # Put here!!
+  
 jobs:
-  greeting:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
+
     steps:
-    - uses: actions/first-interaction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Message that will be displayed on users' first issue"
-        pr-message: "Message that will be displayed on users' first pull request"
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: echo Hello, world!
